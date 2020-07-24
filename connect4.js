@@ -71,7 +71,8 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   const piece = document.createElement("div");
-  piece.setAttribute('class',`piece p${currPlayer}`);  
+  piece.style.top = `${ 50 * (y + 1.8)}px`; //! this line
+  piece.setAttribute('class',`piece p${currPlayer}`);    
   const spot = document.getElementById(`${y}-${x}`);
   spot.append(piece);
 }
@@ -124,7 +125,7 @@ function checkForWin() {
     //  - cells: list of four (y, x) cells
     //  - returns true if all are legal coordinates & all match currPlayer
 
-    return cells.every(
+    return cells.every( 
       ([y, x]) =>
         y >= 0 &&
         y < HEIGHT &&
