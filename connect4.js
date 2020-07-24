@@ -71,7 +71,7 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   const piece = document.createElement("div");
-  piece.style.top = `${ - 50 * (y + 2)}px`; 
+  piece.style.top = `${ -50 * (y + 2)}px`; 
   piece.setAttribute('class',`piece p${currPlayer}`);    
   const spot = document.getElementById(`${y}-${x}`);
   spot.append(piece);
@@ -80,9 +80,11 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
+  // TODO: pop up alert message  
   alert(msg);  
-}
+};
+
+
 
 /** handleClick: handle click of column top to play piece */
 
@@ -102,9 +104,9 @@ function handleClick(evt) {
   placeInTable(y, x);
 
   // check for win
-  if (checkForWin()) {    
+  if (checkForWin()) {   
     return endGame(`Player ${currPlayer} won!`);
-  } 
+  }
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
@@ -134,7 +136,7 @@ function checkForWin() {
         x < WIDTH &&
         board[y][x] === currPlayer
     );
-  }
+  }  
 
   // TODO: read and understand this code. Add comments to help you.
 

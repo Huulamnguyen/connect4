@@ -1,6 +1,13 @@
 
+/* Import google font rubik */
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+
 #header{
   text-align: center;
+  font-family: 'Rubik', sans-serif;
+  background-color: #0071c5;
+  color: white;
 }
 /* game board table */
 #game {
@@ -9,12 +16,13 @@
 
 #board{
   margin: 0 auto;
+  background-color:#002244;
 }
 
 #board td {
   width: 50px;
   height: 50px;
-  border: solid 1px #666;    
+  border: solid 2px white;    
 }
 
 /* pieces are div within game table cells: draw as colored circles */
@@ -36,15 +44,17 @@
 
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
 .piece.p1 {
-  background-color: red;
+  background-color: #F40009;
+  
 }
 .piece.p2 {
-  background-color: blue;
+  background-color: #1E90FF;
 }
 /* column-top is table row of clickable areas for each column */
 
 #column-top td {
-  border: dashed 1px lightgray;  
+  border: dashed 2px #8DA399;
+  background-color: #ffffff;  
 }
 
 #column-top td:hover {
