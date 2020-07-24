@@ -71,7 +71,7 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   const piece = document.createElement("div");
-  piece.style.top = `${ 50 * (y + 1.8)}px`; //! this line
+  piece.style.top = `${ - 50 * (y + 2)}px`; 
   piece.setAttribute('class',`piece p${currPlayer}`);    
   const spot = document.getElementById(`${y}-${x}`);
   spot.append(piece);
@@ -82,6 +82,7 @@ function placeInTable(y, x) {
 function endGame(msg) {
   // TODO: pop up alert message
   alert(msg);
+  setTimeout(alert, 2000);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -102,16 +103,16 @@ function handleClick(evt) {
   placeInTable(y, x);
 
   // check for win
-  if (checkForWin()) {
+  if (checkForWin()) {    
     return endGame(`Player ${currPlayer} won!`);
-  }
+  } 
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
   if (board.every(row => row.every(cell => cell))) {
     return endGame('This is end!')
   }
-
+  
   // switch players
   // TODO: switch currPlayer 1 <-> 2
   currPlayer === 1 ? currPlayer = 2 : currPlayer = 1;
@@ -125,6 +126,7 @@ function checkForWin() {
     //  - cells: list of four (y, x) cells
     //  - returns true if all are legal coordinates & all match currPlayer
 
+    //* to check every spot have the same color , if it true then alert which player win.
     return cells.every( 
       ([y, x]) =>
         y >= 0 &&
@@ -137,19 +139,23 @@ function checkForWin() {
 
   // TODO: read and understand this code. Add comments to help you.
 
-  for (var y = 0; y < HEIGHT; y++) {
-    for (var x = 0; x < WIDTH; x++) {
-      var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-      var vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-      var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-      var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
+  for (var y = 0; y < HEIGHT; y++) { //* loop over rows 
+    for (var x = 0; x < WIDTH; x++) { //* loop over cells in each row
+      var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]]; //* check horizontally 4 spot have the same color 
+      var vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]]; //* check verizontally 4 spot have the same color 
+      var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]]; //* check if there are same colors on the same line 
+      var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]]; //* check if there are same colors on the same line 
 
-      if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
+      if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) { //* if one of the conditions is true, then execute checkForWin() function
         return true;
       }
     }
   }
 }
+
+
+
+
 
 makeBoard();
 makeHtmlBoard();
