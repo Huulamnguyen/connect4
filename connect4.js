@@ -5,17 +5,18 @@
  * board fills (tie)
  */
 
-var WIDTH = 7;
-var HEIGHT = 6;
+const WIDTH = 7;
+const HEIGHT = 6;
 
-var currPlayer = 1; // active player: 1 or 2
-var board = []; // array of rows, each row is array of cells  (board[y][x])
+let currPlayer = 1; //* active player: 1 or 2
+let board = []; //* array of rows, each row is array of cells  (board[y][x])
 
-/** makeBoard: create in-JS board structure:
- *    board = array of rows, each row is array of cells  (board[y][x])
- */
+let gameIsRunning = true; //* declare a variable "gameIsRunning" to boolean value "true"
 
-function makeBoard() {
+//** makeBoard: create in-JS board structure:
+    //TODO: board = array of rows, each row is array of cells  (board[y][x])
+
+function makeBoard() {  
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
   for (let x = 0 ; x < HEIGHT ; x++){
     board.push(Array.from({length:WIDTH}));
@@ -54,7 +55,7 @@ function makeHtmlBoard() {
   }
 }
 
-/** findSpotForCol: given column x, return top empty y (null if filled) */
+//TODO: findSpotForCol: given column x, return top empty y (null if filled)
 
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
@@ -66,29 +67,36 @@ function findSpotForCol(x) {
   return null;
 };
 
-/** placeInTable: update DOM to place piece into HTML table of board */
-
-function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
+// TODO: create function createPiece():
+function createPiece(y, x){
   const piece = document.createElement("div");
   piece.style.top = `${ -50 * (y + 2)}px`; 
-  piece.setAttribute('class',`piece p${currPlayer}`);    
-  const spot = document.getElementById(`${y}-${x}`);
-  spot.append(piece);
-}
+  piece.setAttribute('class',`piece p${currPlayer}`);
+  return piece; 
+};
 
+/** placeInTable: update DOM to place piece into HTML table of board */
+function placeInTable(y, x) {
+  // TODO: make a div and insert into correct table cell     
+  const spot = document.getElementById(`${y}-${x}`);
+  spot.append(createPiece(y, x));
+}
 /** endGame: announce game end */
 
 function endGame(msg) {
+  gameIsRunning = false;
   // TODO: pop up alert message
   setTimeout(function(){
     alert(msg); 
-  }, 1000)    
+  }, 2000)    
 };
 
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
+  if(gameIsRunning === false) {
+    return;
+  }
   // get x from ID of clicked cell
   var x = +evt.target.id;
 
@@ -153,10 +161,6 @@ function checkForWin() {
     }
   }
 }
-
-
-
-
 
 makeBoard();
 makeHtmlBoard();
