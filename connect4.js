@@ -80,11 +80,11 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message  
-  alert(msg);  
+  // TODO: pop up alert message
+  setTimeout(function(){
+    alert(msg); 
+  }, 1000)    
 };
-
-
 
 /** handleClick: handle click of column top to play piece */
 
